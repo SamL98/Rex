@@ -1,0 +1,16 @@
+PODS:
+  - Google-Mobile-Ads-SDK (7.8.1)
+  - OAuthSwift (0.5.2)
+  - SwiftyTimer (1.4.0)
+
+DEPENDENCIES:
+  - Google-Mobile-Ads-SDK
+  - OAuthSwift
+  - SwiftyTimer
+
+SPEC CHECKSUMS:
+  Google-Mobile-Ads-SDK: 3c2a6656117989469bfe7645640aa1de024a4c6c
+  OAuthSwift: 1ef042d4362e755e24a78f158d817245641a5d24
+  SwiftyTimer: db4458cfaf67fc71e16ad6e4637c60b86f76a649
+
+COCOAPODS: 0.39.0
