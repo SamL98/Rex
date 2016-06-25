@@ -11,8 +11,8 @@ class SpotifyAPIManager {
     // MARK: Constants
     private struct Constants {
         struct Keys {
-            static let client_id = "d74ef5930c9e493a8f3100eebd3704eb"
-            static let client_secret = "e9511d54ebb04fee8e7989fd52f0aa82"
+            static let client_id = "_"
+            static let client_secret = "_"
         }
         struct Components {
             static let response_type = "code"
