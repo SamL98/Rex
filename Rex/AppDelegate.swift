@@ -9,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         let sdk = STAStartAppSDK.sharedInstance()
-        sdk.appID = "204355296"
+        sdk.appID = "_"
         
         application.statusBarStyle = .LightContent
         
