@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		4F87E6CB74A687257A9F755C /* Pods_Rex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42586D9D2611D0FABEECD05 /* Pods_Rex.framework */; };
+		B7512C961CF61077003793D7 /* StartApp.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B7512C941CF61077003793D7 /* StartApp.bundle */; };
+		B7512C971CF61077003793D7 /* StartApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7512C951CF61077003793D7 /* StartApp.framework */; };
+		B7512C991CF610AC003793D7 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7512C981CF610AC003793D7 /* CoreTelephony.framework */; };
+		B7512C9B1CF610BB003793D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7512C9A1CF610BB003793D7 /* SystemConfiguration.framework */; };
+		B7512C9D1CF610C4003793D7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7512C9C1CF610C4003793D7 /* CoreGraphics.framework */; };
+		B7512C9F1CF610CB003793D7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7512C9E1CF610CB003793D7 /* StoreKit.framework */; };
+		B7512CA11CF610D1003793D7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7512CA01CF610D1003793D7 /* AdSupport.framework */; };
+		B7512CA31CF610D9003793D7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7512CA21CF610D9003793D7 /* QuartzCore.framework */; };
+		B7512CA51CF610E0003793D7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7512CA41CF610E0003793D7 /* CoreMedia.framework */; };
+		B7512CA71CF610F0003793D7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B7512CA61CF610F0003793D7 /* libz.tbd */; };
 		B784B15C1CEA190100C3530E /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B784B1381CEA190100C3530E /* ContainerViewController.swift */; };
 		B784B15D1CEA190100C3530E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B784B1391CEA190100C3530E /* ViewController.swift */; };
 		B784B15E1CEA190100C3530E /* RecommendationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B784B13A1CEA190100C3530E /* RecommendationTableViewController.swift */; };
@@ -37,6 +47,17 @@
 /* Begin PBXFileReference section */
 		321467C63357668A0362C89E /* Pods-Rex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rex.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rex/Pods-Rex.debug.xcconfig"; sourceTree = "<group>"; };
 		A42586D9D2611D0FABEECD05 /* Pods_Rex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7512C941CF61077003793D7 /* StartApp.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = StartApp.bundle; sourceTree = "<group>"; };
+		B7512C951CF61077003793D7 /* StartApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = StartApp.framework; sourceTree = "<group>"; };
+		B7512C981CF610AC003793D7 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		B7512C9A1CF610BB003793D7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B7512C9C1CF610C4003793D7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B7512C9E1CF610CB003793D7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		B7512CA01CF610D1003793D7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		B7512CA21CF610D9003793D7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B7512CA41CF610E0003793D7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		B7512CA61CF610F0003793D7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		B7512CA81CF611A1003793D7 /* StartApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "StartApp-Bridging-Header.h"; path = "../StartApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		B784B1231CEA18BA00C3530E /* Rex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B784B1381CEA190100C3530E /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContainerViewController.swift; path = /Users/SamLerner/Desktop/XCodeWorkSpace/Rex/Rex/ContainerViewController.swift; sourceTree = "<absolute>"; };
 		B784B1391CEA190100C3530E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = /Users/SamLerner/Desktop/XCodeWorkSpace/Rex/Rex/ViewController.swift; sourceTree = "<absolute>"; };
@@ -71,6 +92,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7512CA71CF610F0003793D7 /* libz.tbd in Frameworks */,
+				B7512CA51CF610E0003793D7 /* CoreMedia.framework in Frameworks */,
+				B7512CA31CF610D9003793D7 /* QuartzCore.framework in Frameworks */,
+				B7512CA11CF610D1003793D7 /* AdSupport.framework in Frameworks */,
+				B7512C9F1CF610CB003793D7 /* StoreKit.framework in Frameworks */,
+				B7512C9D1CF610C4003793D7 /* CoreGraphics.framework in Frameworks */,
+				B7512C9B1CF610BB003793D7 /* SystemConfiguration.framework in Frameworks */,
+				B7512C991CF610AC003793D7 /* CoreTelephony.framework in Frameworks */,
+				B7512C971CF61077003793D7 /* StartApp.framework in Frameworks */,
 				B784B1751CEA5C7500C3530E /* AVFoundation.framework in Frameworks */,
 				4F87E6CB74A687257A9F755C /* Pods_Rex.framework in Frameworks */,
 			);
@@ -82,15 +112,33 @@
 		7E3CBA580155C980A20BA853 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B7512CA61CF610F0003793D7 /* libz.tbd */,
+				B7512CA41CF610E0003793D7 /* CoreMedia.framework */,
+				B7512CA21CF610D9003793D7 /* QuartzCore.framework */,
+				B7512CA01CF610D1003793D7 /* AdSupport.framework */,
+				B7512C9E1CF610CB003793D7 /* StoreKit.framework */,
+				B7512C9C1CF610C4003793D7 /* CoreGraphics.framework */,
+				B7512C9A1CF610BB003793D7 /* SystemConfiguration.framework */,
+				B7512C981CF610AC003793D7 /* CoreTelephony.framework */,
 				B784B1741CEA5C7500C3530E /* AVFoundation.framework */,
 				A42586D9D2611D0FABEECD05 /* Pods_Rex.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B7512C931CF6104B003793D7 /* StartAppSDK */ = {
+			isa = PBXGroup;
+			children = (
+				B7512C941CF61077003793D7 /* StartApp.bundle */,
+				B7512C951CF61077003793D7 /* StartApp.framework */,
+			);
+			name = StartAppSDK;
+			sourceTree = "<group>";
+		};
 		B784B11A1CEA18BA00C3530E = {
 			isa = PBXGroup;
 			children = (
+				B7512C931CF6104B003793D7 /* StartAppSDK */,
 				B784B1251CEA18BB00C3530E /* Rex */,
 				B784B1241CEA18BA00C3530E /* Products */,
 				D75AB470D32334FD38E16465 /* Pods */,
@@ -109,6 +157,7 @@
 		B784B1251CEA18BB00C3530E /* Rex */ = {
 			isa = PBXGroup;
 			children = (
+				B7512CA81CF611A1003793D7 /* StartApp-Bridging-Header.h */,
 				B784B13D1CEA190100C3530E /* Controllers */,
 				B784B1401CEA190100C3530E /* Models */,
 				B784B1431CEA190100C3530E /* Services */,
@@ -300,6 +349,7 @@
 			files = (
 				B784B1651CEA190100C3530E /* Main.storyboard in Resources */,
 				B784B1681CEA190100C3530E /* Assets.xcassets in Resources */,
+				B7512C961CF61077003793D7 /* StartApp.bundle in Resources */,
 				B784B1661CEA190100C3530E /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,12 +548,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Rex/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.Rex.RecommenderApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.fuckyouapple.Rex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4d8b2593-26bf-4af4-a01d-74ee84c04942";
+				SWIFT_OBJC_BRIDGING_HEADER = "StartApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Debug;
@@ -513,14 +570,21 @@
 			baseConfigurationReference = EAB57C4A6BB5A5CE4888A3EE /* Pods-Rex.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Sam Lerner (5HEWYRTN5L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sam Lerner (5HEWYRTN5L)";
+				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Rex/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.Rex.RecommenderApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.fuckyouapple.Rex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4d8b2593-26bf-4af4-a01d-74ee84c04942";
+				SWIFT_OBJC_BRIDGING_HEADER = "StartApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;

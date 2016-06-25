@@ -81,11 +81,11 @@ class TriangleLayer: CAShapeLayer {
     
     var hexagonPath: UIBezierPath {
         let path = UIBezierPath()
-        path.moveToPoint(CGPoint(x: parentFrame.width/5, y: 13*parentFrame.height/15))
-        path.addLineToPoint(CGPoint(x: 4*parentFrame.width/5, y: 13*parentFrame.height/15))
+        path.moveToPoint(CGPoint(x: parentFrame.width/5, y: parentFrame.height))
+        path.addLineToPoint(CGPoint(x: 4*parentFrame.width/5, y: parentFrame.height))
         path.addLineToPoint(CGPoint(x: parentFrame.width, y: parentFrame.height/2))
-        path.addLineToPoint(CGPointMake(4*parentFrame.width/5, 2*parentFrame.height/15))
-        path.addLineToPoint(CGPointMake(parentFrame.width/5, 2*parentFrame.height/15))
+        path.addLineToPoint(CGPointMake(4*parentFrame.width/5, 0))
+        path.addLineToPoint(CGPointMake(parentFrame.width/5, 0))
         path.addLineToPoint(CGPointMake(0, parentFrame.height/2))
         path.closePath()
         return path

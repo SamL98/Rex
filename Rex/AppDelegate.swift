@@ -1,5 +1,6 @@
 import UIKit
 import OAuthSwift
+import SwiftyTimer
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -7,6 +8,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        let sdk = STAStartAppSDK.sharedInstance()
+        sdk.appID = "204355296"
+        
         application.statusBarStyle = .LightContent
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

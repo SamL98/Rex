@@ -76,6 +76,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         loadingView.addTriangle(loginClosure)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        selectedTrack = nil
+    }
+    
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
@@ -303,7 +308,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedTrack = tracks[indexPath.row]
+        if !isSearching {
+            selectedTrack = tracks[indexPath.row - 1]
+        } else {
+            if indexPath.row != searchResults.count + 1 {
+                selectedTrack = searchResults[indexPath.row - 1]
+            }
+        }
         performSegueWithIdentifier("showRecs", sender: self)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
@@ -357,7 +368,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func addLoginInfo() {
-        infoLabel.frame = CGRectMake(view.bounds.width/6, view.bounds.height/4, 2*view.bounds.width/3, 125.0)
+        infoLabel.frame = CGRectMake(view.bounds.width/6, view.bounds.height/5 - 25.0, 2*view.bounds.width/3, 175.0)
         infoLabel.textAlignment = .Center
         infoLabel.textColor = UIColor.darkGrayColor()
         infoLabel.font = UIFont(name: "Avenir Next", size: 20.0)

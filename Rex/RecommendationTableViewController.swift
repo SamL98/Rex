@@ -173,7 +173,9 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
         
         SpotifyAPIManager.sharedInstance.saveTrack(song, onCompletion: {
             self.isUploaded[self.tapIndex] = true
-            self.tableView.reloadData()
+            dispatch_async(dispatch_get_main_queue(), {
+                self.tableView.reloadData()
+            })
         })
     }
     
@@ -188,7 +190,9 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
         
         SpotifyAPIManager.sharedInstance.saveToPlaylist(song, playlist: playlist) {
             self.isUploaded[self.tapIndex] = true
-            self.tableView.reloadData()
+            dispatch_async(dispatch_get_main_queue(), {
+                self.tableView.reloadData()
+            })
         }
     }
     

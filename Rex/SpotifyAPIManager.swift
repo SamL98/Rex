@@ -49,6 +49,7 @@ class SpotifyAPIManager {
             self.fetchUserID()
             self.defaults.setBool(true, forKey: "loggedIn")
             NSUserDefaults.standardUserDefaults().setObject(parameters["refresh_token"], forKey: "refreshToken")
+            self.startTokenCounter()
             
             /*do {
                 try Locksmith.saveData(["refreshToken" : parameters["refresh_token"]!], forUserAccount: "myUserAccount")
@@ -84,11 +85,30 @@ class SpotifyAPIManager {
                 let access_token = self.parseJSON(data)
                 self.auth.client.credential.oauth_token = access_token
                 self.fetchUserID()
+                self.startTokenCounter()
                     
                 onCompletion()
             }, failure: { error in
                 print("error while refreshing oauth token: \(error)")
         })
+    }
+    
+    func startTokenCounter()
+    {
+        /*var count = 0
+        
+        func incrementTokenCounter() {
+            count += 1
+            if count == 3600 {
+                self.refreshAuthToken {
+                    self.startTokenCounter()
+                }
+            }
+        }
+        
+        NSTimer.every(1.0.seconds) {
+            incrementTokenCounter()
+        }*/
     }
     
     func createRefreshTokenAuthorizationHeader() -> String {
