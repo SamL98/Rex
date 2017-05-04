@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "65ADF5544A4341E776D568C5D7754BC0524358A9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "65ADF5544A4341E776D568C5D7754BC0524358A9" : 9223372036854775807,
+    "117E171A6D935B7CFFB702289359F7EC8BA33BA9" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3A4952B7-79B9-489C-82EA-2481D49B52F9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "65ADF5544A4341E776D568C5D7754BC0524358A9" : "Rex\/",
+    "117E171A6D935B7CFFB702289359F7EC8BA33BA9" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Rex",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Rex.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ChatZoneRavi\/ChatZone_iOS_3.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "117E171A6D935B7CFFB702289359F7EC8BA33BA9"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/SamuelNLerner\/Rex.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "65ADF5544A4341E776D568C5D7754BC0524358A9"
+    }
+  ]
+}

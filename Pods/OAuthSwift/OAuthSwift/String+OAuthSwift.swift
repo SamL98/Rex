@@ -10,12 +10,12 @@ import Foundation
 
 extension String {
 
-    internal func indexOf(sub: String) -> Int? {
+    internal func indexOf(_ sub: String) -> Int? {
         var pos: Int?
         
-        if let range = self.rangeOfString(sub) {
+        if let range = self.range(of: sub) {
             if !range.isEmpty {
-                pos = self.startIndex.distanceTo(range.startIndex)
+                pos = self.characters.distance(from: self.startIndex, to: range.lowerBound)
             }
         }
         
@@ -24,16 +24,16 @@ extension String {
     
     internal subscript (r: Range<Int>) -> String {
         get {
-            let startIndex = self.startIndex.advancedBy(r.startIndex)
-            let endIndex = startIndex.advancedBy(r.endIndex - r.startIndex)
+            let startIndex = self.characters.index(self.startIndex, offsetBy: r.lowerBound)
+            let endIndex = <#T##String.CharacterView corresponding to `startIndex`##String.CharacterView#>.index(startIndex, offsetBy: r.upperBound - r.lowerBound)
             return self[startIndex..<endIndex]
         }
     }
 
-    func urlEncodedStringWithEncoding(encoding: NSStringEncoding) -> String {
-        let originalString: NSString = self
-        let customAllowedSet =  NSCharacterSet(charactersInString:"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~")
-        let escapedString = originalString.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)
+    func urlEncodedStringWithEncoding(_ encoding: String.Encoding) -> String {
+        let originalString: NSString = self as NSString
+        let customAllowedSet =  CharacterSet(charactersIn:"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~")
+        let escapedString = originalString.addingPercentEncoding(withAllowedCharacters: customAllowedSet)
         return escapedString! as String
     }
 
@@ -42,10 +42,10 @@ extension String {
     }
     
     var urlQueryEncoded: String? {
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+        return self.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
     }
 
-    func dictionaryBySplitting(elementSeparator: String, keyValueSeparator: String) -> Dictionary<String, String> {
+    func dictionaryBySplitting(_ elementSeparator: String, keyValueSeparator: String) -> Dictionary<String, String> {
 		
 		var string = self
 		if(hasPrefix(elementSeparator)) {
@@ -54,19 +54,19 @@ extension String {
 		
         var parameters = Dictionary<String, String>()
 
-        let scanner = NSScanner(string: string)
+        let scanner = Scanner(string: string)
 
         var key: NSString?
         var value: NSString?
 
-        while !scanner.atEnd {
+        while !scanner.isAtEnd {
             key = nil
-            scanner.scanUpToString(keyValueSeparator, intoString: &key)
-            scanner.scanString(keyValueSeparator, intoString: nil)
+            scanner.scanUpTo(keyValueSeparator, into: &key)
+            scanner.scanString(keyValueSeparator, into: nil)
 
             value = nil
-            scanner.scanUpToString(elementSeparator, intoString: &value)
-            scanner.scanString(elementSeparator, intoString: nil)
+            scanner.scanUpTo(elementSeparator, into: &value)
+            scanner.scanString(elementSeparator, into: nil)
 
             if (key != nil && value != nil) {
                 parameters.updateValue(value! as String, forKey: key! as String)
@@ -84,7 +84,7 @@ extension String {
         return self.stringByRemovingPercentEncoding ?? self
     }
     
-    func split(s:String)->[String]{
+    func split(_ s:String)->[String]{
         if s.isEmpty{
             var x=[String]()
             for y in self.characters{
@@ -92,26 +92,26 @@ extension String {
             }
             return x
         }
-        return self.componentsSeparatedByString(s)
+        return self.components(separatedBy: s)
     }
     func trim()->String{
-        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        return self.trimmingCharacters(in: CharacterSet.whitespaces)
     }
-    func has(s:String)->Bool{
-        if (self.rangeOfString(s) != nil) {
+    func has(_ s:String)->Bool{
+        if (self.range(of: s) != nil) {
             return true
         }else{
             return false
         }
     }
-    func hasBegin(s:String)->Bool{
+    func hasBegin(_ s:String)->Bool{
         if self.hasPrefix(s) {
             return true
         }else{
             return false
         }
     }
-    func hasEnd(s:String)->Bool{
+    func hasEnd(_ s:String)->Bool{
         if self.hasSuffix(s) {
             return true
         }else{
@@ -124,7 +124,7 @@ extension String {
     func size()->Int{
         return self.utf16.count
     }
-    func `repeat`(times: Int) -> String{
+    func `repeat`(_ times: Int) -> String{
         var result = ""
         for _ in 0..<times {
             result += self
@@ -132,7 +132,7 @@ extension String {
         return result
     }
     func reverse()-> String{
-        let s=Array(self.split("").reverse())
+        let s=Array(self.split("").reversed())
         var x=""
         for y in s{
             x+=y

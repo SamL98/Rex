@@ -4,7 +4,7 @@ class ContainerViewController: UIViewController {
 
     // MARK: Properties
     let menuWidth: CGFloat = 100.0
-    let animationTime: NSTimeInterval = 0.5
+    let animationTime: TimeInterval = 0.5
     var isOpening = false
     
     var menuVC: UIViewController!
@@ -25,15 +25,15 @@ class ContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "loadedPlaylists")
+        UserDefaults.standard.set(false, forKey: "loadedPlaylists")
         
         addChildViewController(centerVC)
         view.addSubview(centerVC.view)
-        centerVC.didMoveToParentViewController(self)
+        centerVC.didMove(toParentViewController: self)
         
         addChildViewController(menuVC)
         view.addSubview(menuVC.view)
-        menuVC.didMoveToParentViewController(self)
+        menuVC.didMove(toParentViewController: self)
         
         let menuButton = ((centerVC as! UINavigationController).viewControllers.first as? ViewController)?.hamburgerButton
         menuButton?.action = #selector(ContainerViewController.toggleMenu)
@@ -45,67 +45,67 @@ class ContainerViewController: UIViewController {
         setToPercent(0.0)
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
     
     // MARK: Actions
-    func handlePan(sender: UIPanGestureRecognizer) {
-        if !NSUserDefaults.standardUserDefaults().boolForKey("loadedPlaylists") {
+    func handlePan(_ sender: UIPanGestureRecognizer) {
+        if !UserDefaults.standard.bool(forKey: "loadedPlaylists") {
             (menuVC as! MenuViewController).populatePlaylists()
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "loadedPlaylists")
+            UserDefaults.standard.set(true, forKey: "loadedPlaylists")
         }
         
-        let translation = sender.translationInView(sender.view!.superview)
+        let translation = sender.translation(in: sender.view!.superview)
         var progress = translation.x / menuWidth * (isOpening ? 1.0 : -1.0)
         progress = min(max(progress, 0.0), 1.0)
         
         switch sender.state {
-        case .Began:
+        case .began:
             let isOpen = floor(centerVC.view.frame.origin.x/menuWidth)
             isOpening = isOpen == 1.0 ? false: true
-        case .Changed:
+        case .changed:
             self.setToPercent(isOpening ? progress: (1.0 - progress))
-        case .Ended: fallthrough
-        case .Cancelled: fallthrough
-        case .Failed:
+        case .ended: fallthrough
+        case .cancelled: fallthrough
+        case .failed:
             var targetProgress: CGFloat
             if (isOpening) {
                 targetProgress = progress < 0.5 ? 0.0 : 1.0
             } else {
                 targetProgress = progress < 0.5 ? 1.0 : 0.0
             }
-            UIView.animateWithDuration(animationTime, animations: { self.setToPercent(targetProgress) })
+            UIView.animate(withDuration: animationTime, animations: { self.setToPercent(targetProgress) })
         default: break
         }
     }
     
     func toggleMenu() {
-        if !NSUserDefaults.standardUserDefaults().boolForKey("loadedPlaylists") {
+        if !UserDefaults.standard.bool(forKey: "loadedPlaylists") {
             (menuVC as! MenuViewController).populatePlaylists()
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "loadedPlaylists")
+            UserDefaults.standard.set(true, forKey: "loadedPlaylists")
         }
         
         let isOpen = floor(centerVC.view.frame.origin.x/menuWidth)
         let target: CGFloat = isOpen == 1.0 ? 0.0 : 1.0
         
-        UIView.animateWithDuration(animationTime, animations: { self.setToPercent(target) })
+        UIView.animate(withDuration: animationTime, animations: { self.setToPercent(target) })
     }
     
-    func setToPercent(percent: CGFloat) {
+    func setToPercent(_ percent: CGFloat) {
         centerVC.view.frame.origin.x = menuWidth * CGFloat(percent)
         menuVC.view.transform = menuTransform(percent)
         menuVC.view.alpha = CGFloat(max(0.2, percent))
     }
     
-    func menuTransform(percent: CGFloat) -> CGAffineTransform {
-        let identity = CGAffineTransformIdentity
+    func menuTransform(_ percent: CGFloat) -> CGAffineTransform {
+        let identity = CGAffineTransform.identity
         let distance = menuWidth * percent
-        return CGAffineTransformTranslate(identity, distance, 0.0)
+        return identity.translatedBy(x: distance, y: 0.0)
     }
 
 }

@@ -11,12 +11,12 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
     
     // MARK: Data Service
@@ -31,7 +31,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             var i = 0
             while i < self.playlists.count - 1 {
-                if self.playlists[i].title == "Discover Weekly" { self.playlists.removeAtIndex(i); break }
+                if self.playlists[i].title == "Discover Weekly" { self.playlists.remove(at: i); break }
                 i += 1
             }
             
@@ -40,21 +40,21 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     // MARK: UITableViewDataSource
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (playlists != nil ? playlists.count + 1 : 1)
     }
     
     // MARK: UITableViewDelegate
-    func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return 35.0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("playlistCell")!
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "playlistCell")!
         let title = cell.viewWithTag(69) as! UILabel
         
         if indexPath.row == 0 {
@@ -70,8 +70,8 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let container = self.parentViewController as! ContainerViewController
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let container = self.parent as! ContainerViewController
         container.toggleMenu()
         let children = container.childViewControllers
         var vc = ViewController()

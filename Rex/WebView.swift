@@ -5,13 +5,13 @@ class WebView: OAuthWebViewController {
     
     typealias WebView = UIWebView
     
-    var targetURL : NSURL = NSURL()
+    var targetURL : URL = URL()
     let webView : WebView = WebView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.webView.frame = UIScreen.mainScreen().bounds
+        self.webView.frame = UIScreen.main.bounds
         self.webView.scalesPageToFit = true
         self.webView.delegate = self
         self.view.addSubview(self.webView)
@@ -19,7 +19,7 @@ class WebView: OAuthWebViewController {
 
     }
     
-    override func handle(url: NSURL) {
+    override func handle(_ url: URL) {
         targetURL = url
         super.handle(url)
         
@@ -27,15 +27,15 @@ class WebView: OAuthWebViewController {
     }
     
     func loadAddressURL() {
-        let req = NSURLRequest(URL: targetURL)
+        let req = URLRequest(url: targetURL)
         self.webView.loadRequest(req)
     }
     
 }
 
 extension WebView: UIWebViewDelegate {
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if let url = request.URL where (url.scheme == "rexapp"){
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if let url = request.url, (url.scheme == "rexapp"){
             self.dismissWebViewController()
         }
         return true

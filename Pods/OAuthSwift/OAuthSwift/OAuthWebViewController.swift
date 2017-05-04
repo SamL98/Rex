@@ -19,15 +19,15 @@ import Foundation
     public typealias OAuthViewController = NSViewController
 #endif
 
-public class OAuthWebViewController: OAuthViewController, OAuthSwiftURLHandlerType {
+open class OAuthWebViewController: OAuthViewController, OAuthSwiftURLHandlerType {
 
-    public func handle(url: NSURL) {
+    open func handle(_ url: URL) {
         // do UI in main thread
-        if NSThread.isMainThread() {
+        if Thread.isMainThread {
              doHandle(url)
         }
         else {
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 self.doHandle(url)
             }
         }
@@ -37,13 +37,13 @@ public class OAuthWebViewController: OAuthViewController, OAuthSwiftURLHandlerTy
     public static var userActivityType: String = "org.github.dongri.oauthswift.connect"
     #endif
 
-    public func doHandle(url: NSURL){
+    open func doHandle(_ url: URL){
         #if os(iOS) || os(tvOS)
-            if let p = self.parentViewController {
-                p.presentViewController(self, animated: true, completion: nil)
+            if let p = self.parent {
+                p.present(self, animated: true, completion: nil)
             } else {
                 #if !OAUTH_APP_EXTENSIONS
-                    UIApplication.topViewController?.presentViewController(self, animated: true, completion: nil)
+                    UIApplication.topViewController?.present(self, animated: true, completion: nil)
                 #endif
             }
         #elseif os(watchOS)
@@ -60,9 +60,9 @@ public class OAuthWebViewController: OAuthViewController, OAuthSwiftURLHandlerTy
         #endif
     }
 
-    public func dismissWebViewController() {
+    open func dismissWebViewController() {
         #if os(iOS) || os(tvOS)
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         #elseif os(watchOS)
             self.dismissController()
         #elseif os(OSX)

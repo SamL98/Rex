@@ -29,8 +29,8 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
     var interstitialAd: GADInterstitial!
     
     //// Timers
-    var timer: NSTimer!
-    var fadeTimer: NSTimer!
+    var timer: Timer!
+    var fadeTimer: Timer!
     
     //// Time Keepers
     var time: Int = 0
@@ -51,7 +51,7 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
     //// Utility
     var tapIndex: Int!
     var player: AVPlayer!
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = UserDefaults.standard
     
     // MARK: UIViewController
     override func viewDidLoad() {
@@ -61,7 +61,7 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
         self.navigationItem.titleView?.alpha = 0.7
         self.navigationItem.titleView?.frame.size.height = 44.0
         
-        timer = NSTimer.new(every: 1.seconds) { self.updateTime() }
+        timer = Timer.new(every: 1.seconds) { self.updateTime() }
         timer.start()
         
         interstitialAd = createAd()
@@ -82,12 +82,12 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
         populateRecommendations()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NSTimer.after(3.0) { self.displayAd() }
+        Timer.after(3.0) { self.displayAd() }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         time = 0
@@ -102,12 +102,12 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
         timer.invalidate()
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return false
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
     
     // MARK: Data Service
@@ -128,8 +128,8 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
                 print("successfully populated recommendations")
                 self.recommendations = tracks
                 
-                self.isPlaying = Array(count: self.recommendations.count, repeatedValue: false)
-                self.isUploaded = Array(count: self.recommendations.count, repeatedValue: false)
+                self.isPlaying = Array(repeating: false, count: self.recommendations.count)
+                self.isUploaded = Array(repeating: false, count: self.recommendations.count)
                 
                 self.loadedRecs = true
                 self.tableView.reloadData()
@@ -148,13 +148,13 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
             
             if let tracks = results {
                 print("successfully refreshed recommendations")
-                let notPlaying = Array(count: tracks.count, repeatedValue: false)
-                let notUploaded = Array(count: tracks.count, repeatedValue: false)
+                let notPlaying = Array(repeating: false, count: tracks.count)
+                let notUploaded = Array(repeating: false, count: tracks.count)
                 
-                self.isPlaying.appendContentsOf(notPlaying)
-                self.isUploaded.appendContentsOf(notUploaded)
+                self.isPlaying.append(contentsOf: notPlaying)
+                self.isUploaded.append(contentsOf: notUploaded)
                 
-                self.recommendations.appendContentsOf(tracks)
+                self.recommendations.append(contentsOf: tracks)
                 
                 self.canRefresh = false
                 self.tableView.reloadData()
@@ -162,35 +162,35 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
         }
     }
     
-    func uploadSong(sender: UITapGestureRecognizer) {
+    func uploadSong(_ sender: UITapGestureRecognizer) {
         print("uploading song")
         
         tapIndex = (sender.view?.tag)! - 500
-        let indexPath = NSIndexPath(forRow: tapIndex, inSection: 0)
+        let indexPath = IndexPath(row: tapIndex, section: 0)
         
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! SongTableViewCell
+        let cell = tableView.cellForRow(at: indexPath) as! SongTableViewCell
         let song = cell.song
         
         SpotifyAPIManager.sharedInstance.saveTrack(song, onCompletion: {
             self.isUploaded[self.tapIndex] = true
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.tableView.reloadData()
             })
         })
     }
     
-    func uploadToPlaylist(sender: UITapGestureRecognizer) {
+    func uploadToPlaylist(_ sender: UITapGestureRecognizer) {
         print("saving to playlist")
         
         tapIndex = (sender.view?.tag)! - 500
-        let indexPath = NSIndexPath(forRow: tapIndex, inSection: 0)
+        let indexPath = IndexPath(row: tapIndex, section: 0)
         
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! SongTableViewCell
+        let cell = tableView.cellForRow(at: indexPath) as! SongTableViewCell
         let song = cell.song
         
         SpotifyAPIManager.sharedInstance.saveToPlaylist(song, playlist: playlist) {
             self.isUploaded[self.tapIndex] = true
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.tableView.reloadData()
             })
         }
@@ -201,27 +201,27 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
         let interstitial = GADInterstitial(adUnitID: "ca-app-pub-1966629303185292/7887414963")
         let request = GADRequest()
         request.testDevices = ["2077ef9a63d2b398840261c8221a0c9b"]
-        interstitial.loadRequest(request)
+        interstitial.load(request)
         return interstitial
     }
     
     func displayAd() {
         if interstitialAd.isReady {
-            interstitialAd.presentFromRootViewController(self)
+            interstitialAd.present(fromRootViewController: self)
         }
     }
     
     // MARK: GADInterstitialDelegate
-    func interstitialDidDismissScreen(ad: GADInterstitial!) {
+    func interstitialDidDismissScreen(_ ad: GADInterstitial!) {
         interstitialAd = createAd()
     }
 
     // MARK: UITableViewDataSource
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if loadedRecs {
             return recommendations.count
         }
@@ -230,8 +230,8 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
     }
     
     // MARK: UITableViewDelegate
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("recCell", forIndexPath: indexPath) as! SongTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recCell", for: indexPath) as! SongTableViewCell
         let recommendation = recommendations[indexPath.row]
         
         let buttonWidth = cell.contentView.frame.height/2 - 5.0
@@ -248,7 +248,7 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
             cell.insertSubview(playButton, aboveSubview: pauseButton)
         }
         
-        let secondaryFrame = CGRectMake(playButton.frame.maxX + 5.0, playButton.frame.origin.y, playButton.frame.size.width, playButton.frame.size.height)
+        let secondaryFrame = CGRect(x: playButton.frame.maxX + 5.0, y: playButton.frame.origin.y, width: playButton.frame.size.width, height: playButton.frame.size.height)
         
         uploadButton = createUploadButtons(secondaryFrame, index: indexPath.row, type: "upload")
         checkmark = createUploadButtons(secondaryFrame, index: indexPath.row, type: "checkmark")
@@ -268,7 +268,7 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
         return cell
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if canRefresh {
             if tableView.contentOffset.y + tableView.frame.size.height >= tableView.contentSize.height {
                 canRefresh = false
@@ -278,9 +278,9 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
     }
     
     // MARK: Playback
-    func playPreview(sender: UITapGestureRecognizer) {
+    func playPreview(_ sender: UITapGestureRecognizer) {
         tapIndex = sender.view!.tag - 200
-        let indexPath = NSIndexPath(forRow: tapIndex, inSection: 0)
+        let indexPath = IndexPath(row: tapIndex, section: 0)
         
         setToPlaying(indexPath)
         tableView.reloadData()
@@ -288,7 +288,7 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
         let rec = recommendations[tapIndex]
         let url = rec.previewURL!
         
-        let playerItem = AVPlayerItem(URL: url)
+        let playerItem = AVPlayerItem(url: url as URL)
         player = AVPlayer(playerItem: playerItem)
         player.volume = 1.0
         player.play()
@@ -300,13 +300,13 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
         shouldUpdate = true
     }
     
-    func pausePreview(sender: UITapGestureRecognizer) {
+    func pausePreview(_ sender: UITapGestureRecognizer) {
         player.pause()
     
         shouldUpdate = false
         
         tapIndex = sender.view!.tag - 200
-        let indexPath = NSIndexPath(forRow: tapIndex, inSection: 0)
+        let indexPath = IndexPath(row: tapIndex, section: 0)
         isPlaying[indexPath.row] = false
         
         tableView.reloadData()
@@ -318,7 +318,7 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
             time += 1
             if time == 25 {
                 shouldFade = true
-                fadeTimer = NSTimer.new(every: 0.1.seconds) { self.fadeOut() }
+                fadeTimer = Timer.new(every: 0.1.seconds) { self.fadeOut() }
                 fadeTimer.start()
             } else if time == 30 {
                 player.pause()
@@ -346,9 +346,9 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
     }
     
     // MARK: View Initialization
-    func createPlaybackButton(frame: CGRect, index: Int, type: String) -> UIView {
+    func createPlaybackButton(_ frame: CGRect, index: Int, type: String) -> UIView {
         let button = type == "play" ? PlayView(frame: frame) : PauseView(frame: frame)
-        button.backgroundColor = UIColor.clearColor()
+        button.backgroundColor = UIColor.clear
         button.tag = index + 200
         
         let selector = type == "play" ? #selector(RecommendationTableViewController.playPreview(_:)) : #selector(RecommendationTableViewController.pausePreview(_:))
@@ -358,9 +358,9 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
         return button
     }
     
-    func createUploadButtons(frame: CGRect, index: Int, type: String) -> UIView {
+    func createUploadButtons(_ frame: CGRect, index: Int, type: String) -> UIView {
         let button = type == "upload" ? UploadView(frame: frame) : CheckView(frame: frame)
-        button.backgroundColor = UIColor.clearColor()
+        button.backgroundColor = UIColor.clear
         
         if type == "upload" {
             button.tag = index + 500
@@ -373,8 +373,8 @@ class RecommendationTableViewController: UIViewController, UITableViewDataSource
     }
     
     // MARK: Utility
-    func setToPlaying(indexPath: NSIndexPath) {
-        isPlaying = Array(count: recommendations.count, repeatedValue: false)
+    func setToPlaying(_ indexPath: IndexPath) {
+        isPlaying = Array(repeating: false, count: recommendations.count)
         isPlaying[indexPath.row] = true
     }
 
